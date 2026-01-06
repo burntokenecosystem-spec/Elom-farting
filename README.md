@@ -1,138 +1,135 @@
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elon's Cash Geyser</title>
+    <title>The Musk Innovation Button</title>
     <style>
         body {
-            background: linear-gradient(180deg, #00a8ff, #9c88ff);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
             margin: 0;
-            overflow: hidden;
+            background-color: #0b0e14; /* Dark space-like theme */
             color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .game-container {
-            position: relative;
+        .container {
             text-align: center;
+            background: #161b22;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #30363d;
         }
 
-        /* The Elon Image */
-        #elon {
-            width: 350px;
-            height: auto;
-            cursor: pointer;
-            position: relative;
-            z-index: 5;
-            transition: transform 0.05s;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            background: linear-gradient(45deg, #1d9bf0, #00ba7c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        #elon:active {
-            transform: scale(0.9) rotate(-5deg);
+        .image-wrapper {
+            margin-bottom: 20px;
         }
 
-        /* The Farting Money */
-        .bill {
-            position: absolute;
-            font-size: 40px;
-            pointer-events: none;
-            z-index: 1;
-            animation: eject 1.5s ease-out forwards;
+        img {
+            width: 250px;
+            height: 250px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 3px solid #30363d;
         }
 
-        @keyframes eject {
-            0% { 
-                transform: translate(0, 0) rotate(0deg); 
-                opacity: 1; 
-            }
-            100% { 
-                transform: translate(var(--x), var(--y)) rotate(720deg); 
-                opacity: 0; 
-            }
-        }
-
-        .ui {
-            margin-top: 20px;
-            z-index: 10;
-        }
-
-        button {
-            background: #4cd137;
-            border: none;
-            padding: 20px 50px;
-            font-size: 30px;
+        #fart-button {
+            padding: 15px 30px;
+            font-size: 20px;
             font-weight: bold;
             color: white;
-            border-radius: 15px;
+            background: linear-gradient(45deg, #1d9bf0, #00ba7c);
+            border: none;
+            border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 8px 0 #44bd32;
-            transition: all 0.1s;
+            transition: transform 0.1s, filter 0.2s;
         }
 
-        button:active {
-            transform: translateY(4px);
-            box-shadow: 0 4px 0 #44bd32;
+        #fart-button:hover {
+            filter: brightness(1.1);
         }
 
-        .stats {
-            font-size: 32px;
+        #fart-button:active {
+            transform: scale(0.95);
+        }
+
+        .counter {
             margin-top: 15px;
-            font-weight: 900;
+            font-size: 18px;
+            color: #8b949e;
+        }
+
+        /* Shake animation for when he "farts" */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            40% { transform: translate(3px, 2px) rotate(-1deg); }
+            60% { transform: translate(-1px, -1px) rotate(1deg); }
+            80% { transform: translate(-3px, 1px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        .shake-effect {
+            animation: shake 0.3s;
         }
     </style>
 </head>
 <body>
 
-    <h1>ELON'S CASH GEYSER</h1>
-
-    <div class="game-container" id="stage">
-        <img src="https://i.imgur.com/8N69w0s.png" id="elon" alt="Elon" onclick="makeItRain()">
+    <div class="container">
+        <h1>X-TREME INNOVATION</h1>
         
-        <div class="ui">
-            <button onclick="makeItRain()">PUSH TO FART MONEY</button>
-            <div class="stats">TOTAL: $<span id="score">0</span></div>
+        <div class="image-wrapper">
+            <img id="elon-img" src="https://r.jina.ai/i/9e0066d091e94875883bc20d37e6097e" alt="Elon Musk Cartoon">
+        </div>
+
+        <button id="fart-button">Press for Innovation</button>
+
+        <div class="counter">
+            Total Innovations: <span id="count">0</span>
         </div>
     </div>
 
+    <audio id="fart-sound" src="fart.mp3"></audio>
+
     <script>
-        let score = 0;
+        const button = document.getElementById('fart-button');
+        const sound = document.getElementById('fart-sound');
+        const img = document.getElementById('elon-img');
+        const countDisplay = document.getElementById('count');
+        
+        let count = 0;
 
-        function makeItRain() {
-            // Update Score
-            score += 1000000;
-            document.getElementById('score').innerText = score.toLocaleString();
+        button.addEventListener('click', () => {
+            // 1. Play Sound
+            sound.currentTime = 0; 
+            sound.play();
 
-            // Create 10 bills per click
-            for(let i = 0; i < 10; i++) {
-                const bill = document.createElement('div');
-                bill.innerHTML = '💵';
-                bill.className = 'bill';
-                
-                // Position start at Elon's "backside" area
-                bill.style.left = '40%';
-                bill.style.top = '50%';
+            // 2. Update Counter
+            count++;
+            countDisplay.innerText = count;
 
-                // Random trajectory (shooting mostly left and down)
-                const xDist = (Math.random() * -600) - 100 + 'px';
-                const yDist = (Math.random() * 400) - 100 + 'px';
-                
-                bill.style.setProperty('--x', xDist);
-                bill.style.setProperty('--y', yDist);
-
-                document.getElementById('stage').appendChild(bill);
-
-                // Remove bill after animation
-                setTimeout(() => bill.remove(), 1500);
-            }
-        }
+            // 3. Shake Image
+            img.classList.add('shake-effect');
+            setTimeout(() => {
+                img.classList.remove('shake-effect');
+            }, 300);
+        });
     </script>
+
 </body>
 </html>
