@@ -4,69 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELON | THE ART OF THE FART</title>
+    <title>ELON | EMISSION MODE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #fff; overflow-x: hidden; }
-        .glitch-text { font-family: 'Syncopate', sans-serif; color: #39ff14; text-shadow: 0 0 10px #39ff14; }
-        .fart-button:hover { box-shadow: 0 0 30px #39ff14; transform: scale(1.05); }
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;900&display=swap');
+        body { background-color: #050505; color: #fff; font-family: 'Inter', sans-serif; overflow: hidden; }
+        .neon-text { font-family: 'Syncopate', sans-serif; color: #39ff14; text-shadow: 0 0 20px #39ff14; }
+        
+        .gas-cloud {
+            position: absolute; width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(57,255,20,0.1) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(60px); animation: drift 15s infinite alternate;
+        }
+        @keyframes drift { from { transform: translate(-20%, -20%); } to { transform: translate(20%, 20%); } }
     </style>
 </head>
-<body>
+<body class="flex items-center justify-center h-screen relative">
 
-    <nav class="flex justify-between items-center p-8 fixed w-full z-50">
-        <div class="text-xl font-black tracking-tighter">ELON<span class="text-green-500">GAS</span></div>
-        <div class="space-x-6 text-[10px] tracking-[0.3em] font-bold uppercase opacity-70">
-            <a href="#">Methane</a>
-            <a href="#">Sonic Boom</a>
-            <a href="#">Scent-Storage</a>
-        </div>
-    </nav>
+    <div class="gas-cloud"></div>
 
-    <main class="h-screen flex flex-col items-center justify-center relative">
-        <div class="absolute inset-0 z-0">
-            <img src="https://imgur.com/a/73OQ86k.jpg" 
-                 alt="Elon Fart" 
-                 class="w-full h-full object-cover opacity-40 grayscale hover:grayscale-0 transition duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black"></div>
+    <div class="relative z-10 text-center bg-black/40 p-8 md:p-12 rounded-[2rem] border border-white/5 backdrop-blur-2xl max-w-lg shadow-2xl">
+        
+        <div class="mb-8 rounded-3xl overflow-hidden border-2 border-green-500/30 group">
+            <img src="https://i.imgur.com/iMPyNbV.jpg" 
+                 alt="Elon Musk" 
+                 class="w-full h-auto grayscale group-hover:grayscale-0 transition duration-700 scale-105 group-hover:scale-100">
         </div>
 
-        <div class="relative z-10 text-center">
-            <h2 class="text-xs tracking-[1em] uppercase mb-4 opacity-60">Introducing</h2>
-            <h1 class="text-7xl md:text-9xl font-black glitch-text mb-6">FART</h1>
-            <p class="max-w-md mx-auto text-gray-400 text-sm leading-relaxed mb-8 uppercase tracking-widest">
-                The world's first fully autonomous, AI-driven emission system. Integrated with Grok for maximum comedic timing.
-            </p>
-            
-            <div class="flex flex-col items-center gap-6">
-                <button onclick="playFart()" class="fart-button bg-green-500 text-black px-12 py-4 rounded-full font-black text-sm uppercase transition-all duration-300">
-                    Pull My Finger
-                </button>
-                <p class="text-[10px] text-green-500 animate-pulse">SYSTEM STATUS: FULLY LOADED</p>
+        <h1 class="text-4xl md:text-6xl font-black neon-text mb-2 italic tracking-tighter">FART</h1>
+        <p class="text-gray-500 uppercase tracking-[0.4em] text-[9px] mb-8 font-bold">Standard on all 2026 Models</p>
+
+        <div class="space-y-6">
+            <div class="px-4">
+                <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-2">Blast Intensity</label>
+                <input type="range" class="w-full accent-green-500 bg-gray-800 rounded-lg appearance-none cursor-pointer">
             </div>
-        </div>
-    </main>
 
-    <section class="grid grid-cols-1 md:grid-cols-3 border-t border-gray-900 bg-black text-center py-16">
-        <div class="p-4">
-            <h4 class="text-3xl font-black">120 dB</h4>
-            <p class="text-xs text-gray-500 uppercase tracking-widest">Acoustic Power</p>
+            <button onclick="playGas()" class="w-full bg-green-500 text-black py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-white transition-all transform active:scale-95 shadow-[0_0_30px_rgba(57,255,20,0.3)]">
+                Deploy Emissions
+            </button>
         </div>
-        <div class="p-4 border-x border-gray-900">
-            <h4 class="text-3xl font-black">AI-SYNC</h4>
-            <p class="text-xs text-gray-500 uppercase tracking-widest">Grok-Enhanced Timing</p>
+        
+        <div class="mt-8 flex justify-between items-center text-[10px] text-gray-500 font-mono">
+            <span>VER: 69.420.X</span>
+            <span class="text-green-500 animate-pulse">● SYSTEM READY</span>
         </div>
-        <div class="p-4">
-            <h4 class="text-3xl font-black">∞</h4>
-            <p class="text-xs text-gray-500 uppercase tracking-widest">Entertainment Value</p>
-        </div>
-    </section>
+    </div>
 
     <script>
-        function playFart() {
-            // This is where the magic happens
-            alert("💨 PFRRRRRRRRRT! (Emission Mode Activated)");
+        function playGas() {
+            // High-quality audio trigger
+            const audio = new Audio('https://www.soundjay.com/human/sounds/fart-01.mp3');
+            audio.play().catch(() => {
+                // Fallback if browser blocks audio
+                alert("💨 PRRRRRRRRRRRRRRRRRRRRT!");
+            });
         }
     </script>
 
