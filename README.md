@@ -4,88 +4,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Snake Game</title>
+    <title>Elon Musk Profile</title>
     <style>
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #2c3e50;
+        }
+        .profile-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 350px;
+        }
+        img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%; /* This makes the image a circle */
+            object-fit: cover;
+            border: 5px solid #007bff;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 10px 0;
+            color: #333;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #007bff;
             color: white;
-            font-family: Arial, sans-serif;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
         }
-        canvas {
-            border: 5px solid #ecf0f1;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            background-color: #000;
+        .btn:hover {
+            background-color: #0056b3;
         }
-        h1 { margin-bottom: 10px; }
-        .score { font-size: 24px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-    <h1>Snake Game</h1>
-    <div class="score">Score: <span id="scoreVal">0</span></div>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div class="profile-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg" alt="Elon Musk">
+        <h1>Elon Musk</h1>
+        <p>Entrepreneur, Engineer, and CEO of SpaceX and Tesla.</p>
+        <a href="https://www.tesla.com" class="btn" target="_blank">Visit Tesla</a>
+    </div>
 
-    <script>
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
-        const scoreElement = document.getElementById("scoreVal");
-
-        const gridSize = 20;
-        const tileCount = canvas.width / gridSize;
-
-        let score = 0;
-        let dx = 0;
-        let dy = 0;
-        let snake = [{x: 10, y: 10}];
-        let food = {x: 5, y: 5};
-
-        // Main game loop
-        function draw() {
-            updateSnake();
-            if (checkGameOver()) return resetGame();
-            
-            drawBackground();
-            drawFood();
-            drawSnake();
-            
-            setTimeout(draw, 100);
-        }
-
-        function drawBackground() {
-            ctx.fillStyle = "black";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-
-        function drawSnake() {
-            ctx.fillStyle = "lime";
-            snake.forEach(part => ctx.fillRect(part.x * gridSize, part.y * gridSize, gridSize - 2, gridSize - 2));
-        }
-
-        function drawFood() {
-            ctx.fillStyle = "red";
-            ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize - 2, gridSize - 2);
-        }
-
-        function updateSnake() {
-            const head = {x: snake[0].x + dx, y: snake[0].y + dy};
-            snake.unshift(head);
-
-            // Check if snake ate food
-            if (head.x === food.x && head.y === food.y) {
-                score++;
-                scoreElement.innerHTML = score;
-                spawnFood();
-            } else {
-                snake.pop();
-            }
-        }
-
-        function spawnFood() {
-            food.x = Math.floor(Math.
+</body>
+</html>
