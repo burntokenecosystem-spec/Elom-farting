@@ -4,85 +4,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELON | ACTION MODE</title>
+    <title>EFART ELON | THE FUTURE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;900&display=swap');
-        body { background-color: #050505; color: #fff; font-family: 'Inter', sans-serif; overflow: hidden; }
-        .neon-text { font-family: 'Syncopate', sans-serif; color: #39ff14; text-shadow: 0 0 20px #39ff14; }
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;900&family=Space+Grotesk:wght@700&display=swap');
+        
+        body { 
+            margin: 0;
+            background: linear-gradient(45deg, #0f0c29, #302b63, #24243e, #00d2ff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
 
-        /* The "Struggle" Shake Animation */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        .neon-btn {
+            background: linear-gradient(90deg, #ff00cc, #3333ff);
+            background-size: 200%;
+            transition: 0.5s;
+        }
+        .neon-btn:hover {
+            background-position: right;
+            box-shadow: 0 0 25px #ff00cc;
+            transform: scale(1.02);
+        }
+
         @keyframes shake {
             0% { transform: translate(1px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
             20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(3px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            40% { transform: translate(3px, 2px) rotate(0deg); }
+            60% { transform: translate(-3px, 1px) rotate(-1deg); }
             80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(1px, 2px) rotate(0deg); }
             100% { transform: translate(1px, -2px) rotate(-1deg); }
         }
+        .animate-shake { animation: shake 0.15s ease-in-out infinite; }
 
-        .animate-shake {
-            animation: shake 0.2s;
-            animation-iteration-count: 3; /* Shakes 3 times fast */
-        }
-
-        /* Gas Cloud Burst */
-        #gas-burst {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(57,255,20,0.6) 0%, rgba(0,0,0,0) 70%);
-            opacity: 0;
-            transition: opacity 0.1s;
-            pointer-events: none;
-            z-index: 5;
+        .token-badge {
+            background: linear-gradient(90deg, #39ff14, #00ffcc);
+            color: #000;
+            font-family: 'Space Grotesk', sans-serif;
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen relative p-4">
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
 
-    <div class="relative z-10 text-center bg-black/60 p-8 md:p-12 rounded-[2.5rem] border border-white/10 backdrop-blur-3xl max-w-lg shadow-2xl">
-        
-        <div class="relative mb-8 rounded-2xl overflow-hidden border-2 border-green-500/50 shadow-[0_0_25px_rgba(57,255,20,0.2)]">
-            <div id="gas-burst"></div> <img id="elon-img" src="https://i.ibb.co/WvZFVqjP/undefined-Imgur.jpg" 
-                 alt="Elon Musk Action" 
-                 class="w-full h-auto block grayscale hover:grayscale-0 transition duration-700">
-        </div>
-
-        <h1 class="text-4xl font-black neon-text mb-2 italic">ACTIVATE</h1>
-        <p class="text-gray-500 uppercase tracking-[0.4em] text-[10px] mb-10 font-bold">Bio-Weapon Defense Mode</p>
-
-        <button onclick="deployEmissions()" class="w-full bg-green-500 text-black py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-white transition-all transform active:scale-90 shadow-lg">
-            Deploy Blast
-        </button>
+    <div class="fixed top-0 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white p-2 text-center font-black text-xs uppercase tracking-widest z-50">
+        🚀 [AD] TO THE MOON! BUY $EFART TOKEN BEFORE IT PUMPS 🚀
     </div>
 
-    <script>
-        function deployEmissions() {
-            const img = document.getElementById('elon-img');
-            const burst = document.getElementById('gas-burst');
-            
-            // 1. Trigger the Shake
-            img.classList.remove('animate-shake');
-            void img.offsetWidth; // Reset animation
-            img.classList.add('animate-shake');
+    <div class="fixed top-12 right-6 token-badge px-6 py-3 rounded-2xl font-black text-lg shadow-xl flex items-center gap-2 z-50">
+        <span class="text-xl">💨</span> <span id="token-count">0</span> $EFART
+    </div>
 
-            // 2. Trigger the Flash of Gas
-            burst.style.opacity = '1';
-            setTimeout(() => { burst.style.opacity = '0'; }, 300);
+    <div class="glass relative z-10 w-full max-w-md p-8 rounded-[3rem] text-center">
+        
+        <div class="relative group">
+            <div id="glow" class="absolute -inset-1 bg-gradient-to-r from-pink-600 to-purple-600 rounded-3xl blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+            <div class="relative bg-black rounded-2xl overflow-hidden border border-white/10">
+                <img id="elon-img" src="https://i.ibb.co/WvZFVqjP/undefined-Imgur.jpg" 
+                     class="w-full h-auto block transition duration-500 group-hover:scale-110">
+            </div>
+        </div>
 
-            // 3. Play Sound
-            const audio = new Audio('https://www.soundjay.com/human/sounds/fart-01.mp3');
-            audio.play().catch(() => {
-                console.log("Audio blocked by browser.");
-            });
-        }
-    </script>
+        <h1 class="mt-8 text-5xl font-black tracking-tighter uppercase italic text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
+            FART MINER
+        </h1>
+        <p class="text-gray-400 text-xs font-bold tracking-[0.3em] mt-2 mb-8">ULTIMATE EMISSION ENGINE</p>
 
-</body>
-</html>
+        <button onclick="mineTokens()" class="neon-btn w-full py-5 rounded-2xl font-black text-white uppercase tracking-widest shadow-2xl active:scale-95">
+            RELEASE & MINE
+        </button>
+
+        <p class="mt-4 text-[10px] text-gray-500 uppercase tracking-widest">+10 Tokens
